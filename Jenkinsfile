@@ -4,13 +4,13 @@ pipeline {
     stages {
         stage('pull project') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/${branch}']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'b413c8af-a93d-4605-9d52-8b1a1f8b21c1', url: 'https://github.com/15367461521/jenkins-test.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'e7c0de3a-2c76-44a4-95af-364a360e4eef', url: 'git@github.com:15367461521/jenkins-test.git']]])
             }
         }
-        stage('builld project') {
+        stage('build project') {
             steps {
                 sh '''#!/bin/sh -l
-mvn clean package'''
+                      mvn clean package'''
             }
         }
     }
