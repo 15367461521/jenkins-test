@@ -10,7 +10,7 @@ pipeline {
         stage('build project') {
             steps {
                 sh '''#!/bin/sh -l
-                      mvn clean package'''
+                      mvn clean package dockerfile:build'''
             }
         }
     }
