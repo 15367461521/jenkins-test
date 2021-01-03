@@ -11,6 +11,11 @@ pipeline {
             steps {
                 sh '''#!/bin/sh -l
                       mvn clean package -DskipTests dockerfile:build'''
+                sh 'docker tag jenkinstest registry.cn-hangzhou.aliyuncs.com/zhongjun/spring-boot-jenkins-test:latest'
+                withCredentials([usernamePassword(credentialsId: '1dfc6b7d-f6d7-48dd-9c5d-96aabbd0d6d9', passwordVariable: 'password', usernameVariable: 'username')]) {
+                    sh 'docker login --username=${username} --password=${password} registry.cn-hangzhou.aliyuncs.com'
+                    sh 'docker push registry.cn-hangzhou.aliyuncs.com/zhongjun/spring-boot-jenkins-test:latest'
+                }
             }
         }
     }
