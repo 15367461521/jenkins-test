@@ -10,14 +10,8 @@ pipeline {
         stage('build project') {
             steps {
                 sh '''#!/bin/sh -l
-                      mvn clean package '''
+                      mvn clean package dockerfile:build'''
             }
         }
-        stage('docker build') {
-                    steps {
-                        sh '''#!/bin/sh -l
-                              docker build --build-arg JAR_FILE=jenkinstest-0.0.1-SNAPSHOT.jar -t jenkinstest:latest .'''
-                    }
-                }
     }
 }
