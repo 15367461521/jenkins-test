@@ -9,13 +9,19 @@ pipeline {
         }
         stage('build project') {
             steps {
+                //maven 打包，docker build
                 sh '''#!/bin/sh -l
                       mvn clean package -DskipTests dockerfile:build'''
+                //docker 打标签
                 sh 'docker tag jenkinstest registry.cn-hangzhou.aliyuncs.com/zhongjun/spring-boot-jenkins-test:latest'
+                //登录阿里docker镜像仓库，上传镜像
                 withCredentials([usernamePassword(credentialsId: '1dfc6b7d-f6d7-48dd-9c5d-96aabbd0d6d9', passwordVariable: 'password', usernameVariable: 'username')]) {
                     sh 'docker login --username=${username} --password=${password} registry.cn-hangzhou.aliyuncs.com'
                     sh 'docker push registry.cn-hangzhou.aliyuncs.com/zhongjun/spring-boot-jenkins-test:latest'
                 }
+                // 删除镜像
+                sh 'docker rmi -f jenkinstest'
+                sh 'docker rmi -f registry.cn-hangzhou.aliyuncs.com/zhongjun/spring-boot-jenkins-test'
             }
         }
     }
