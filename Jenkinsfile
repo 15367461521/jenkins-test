@@ -24,7 +24,7 @@ pipeline {
                 sh 'docker rmi -f registry.cn-hangzhou.aliyuncs.com/zhongjun/spring-boot-jenkins-test'
 
                 // 进行远程项目部署
-                sshPublisher(publishers: [sshPublisherDesc(configName: 'java1', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '/opt/jenkins_shell/deploy.sh', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+                sshPublisher(publishers: [sshPublisherDesc(configName: 'java1', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'sh /opt/jenkins_shell/deploy.sh', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
             }
         }
     }
