@@ -7,7 +7,7 @@ pipeline {
                 // 进行远程项目部署
                 sh '''#!/bin/sh -l
                     ssh root@172.17.0.3
-                    /opt/jenkins_shell/deploy.sh'''
+                    sh /opt/jenkins_shell/deploy.sh'''
             }
         }
     }
