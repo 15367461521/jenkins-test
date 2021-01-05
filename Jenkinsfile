@@ -5,7 +5,9 @@ pipeline {
         stage('build project') {
             steps {
                 // 进行远程项目部署
-                sshPublisher(publishers: [sshPublisherDesc(configName: 'java1', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '/opt/jenkins_shell/deploy.sh', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+                sh '''#!/bin/sh -l
+                    ssh root@172.17.0.3
+                    /opt/jenkins_shell/deploy.sh'''
             }
         }
     }
