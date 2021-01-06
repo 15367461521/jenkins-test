@@ -10,7 +10,7 @@ pipeline {
         stage('build project') {
             steps {
                 // 进行远程项目部署
-                sshPublisher(publishers: [sshPublisherDesc(configName: 'java2', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '/opt/jenkins_shell/deploy.sh', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+                sshPublisher(publishers: [sshPublisherDesc(configName: 'java2', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '/opt/jenkins_shh/deploy.sh', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
             }
         }
     }
